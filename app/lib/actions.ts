@@ -118,10 +118,7 @@ export async function deleteInvoice(id: string) {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
   } catch (error) {
-    // If a database error occurs, return a more specific error.
-    return {
-      message: 'Database Error: Failed to Delete Invoice.',
-    };
+    throw new Error('Failed to Delete Invoice');
   }
   
   redirect('/dashboard/invoices');
